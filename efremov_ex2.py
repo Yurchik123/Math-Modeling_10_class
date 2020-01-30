@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import ArtistAnimation
 
 
-t = np.arange(10**(-7), 3*10**(-7), 10**(-11))
+t = np.arange(1, 5*10**(2), 0.01)
 
 def diff_func(s, t):
     (x1, v_x1, y1, v_y1,     
@@ -38,35 +38,35 @@ def diff_func(s, t):
      
 k = 8.98755 * 10**9
 
-m1 = 2 * 10**(-27)
-m2 = 1 * 10**(-27)
-m3 = 1.5 * 10**(-27)
+m1 = 2 * 10**(-5)
+m2 = 1 * 10**(-5)
+m3 = 1.5 * 10**(-5)
 
-q1 = 1.1 * 10**(-19)
-q2 = 3.1 * 10**(-19)
-q3 = - 2.1 * 10**(-19)
+q1 = 1.1 * 10**(-2)
+q2 = 1.1 * 10**(-2)
+q3 = - 1.1 * 10**(-2)
 
 x10 = 0
-v_x10 = 0
-y10 = 5
+v_x10 = 1
+y10 = 5 * 10**(-1)
 v_y10 = 0
 
-x20 = -4
-v_x20 = 0
-y20 = -3
+x20 = -4 * 10**(-1)
+v_x20 = 1
+y20 = -3 * 10**(-1)
 v_y20 = 0
 
-x30 = 4
+x30 = 4 * 10**(-1)
 v_x30 = 0
-y30 = -3
-v_y30 = 0
+y30 = -3 * 10**(-1)
+v_y30 = 1
 
 s0 = (x10, v_x10, y10, v_y10,
       x20, v_x20, y20, v_y20,
       x30, v_x30, y30, v_y30)
 
 sol = odeint(diff_func, s0, t)
-plt.plot(sol[:, 0], sol[:, 2], 'o', color='b')
+plt.plot(sol[:, 0], sol[:, 2], 'o',  color='b')
 plt.plot(sol[:, 4], sol[:, 6], 'o', color='r')
 plt.plot(sol[:, 8], sol[:, 10], 'o', color='g')
 plt.show()
@@ -80,6 +80,6 @@ for i in range(0, len(t), 1):
     star3, = plt.plot(sol[i, 8], sol[i, 10], 'o', color='g')
     stars.append([star1, star2, star3])
 
-ani = ArtistAnimation(fig, stars, interval=5)
+ani = ArtistAnimation(fig, stars, interval=50)
 plt.axis('equal')
 ani.save('ani.gif')
